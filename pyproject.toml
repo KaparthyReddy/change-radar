@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "change-radar"
+dynamic = ["version"]
+description = "Open-source early warning for fintech rule changes, with every claim quoted from the source."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Kaparthy Reddy Abbavaram" }]
+keywords = ["fintech", "regulatory", "rbi", "npci", "change-monitoring"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
+
+[project.scripts]
+change-radar = "change_radar.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/KaparthyReddy/change-radar"
+Issues = "https://github.com/KaparthyReddy/change-radar/issues"
+
+[tool.hatch.version]
+path = "src/change_radar/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/change_radar"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+files = ["src"]
