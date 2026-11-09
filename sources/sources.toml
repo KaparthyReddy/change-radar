@@ -1,0 +1,26 @@
+# Official public sources that Change Radar reads.
+#
+# Rules:
+# - Only official, public sources.
+# - Keep terms_checked = false until you have read the source's terms of use and
+#   robots.txt and are sure automated access is allowed. Then set terms_url to the
+#   page you read, and terms_checked = true.
+# - Sources with terms_checked = false are skipped unless --include-unchecked is used.
+
+[[source]]
+id = "rbi-notifications"
+name = "RBI notifications"
+kind = "rss"
+url = "https://rbi.org.in/notifications_rss.xml"
+terms_url = ""
+terms_checked = false
+notes = "UNVERIFIED feed address. Confirm it on the RBI RSS page before the first fetch."
+
+[[source]]
+id = "rbi-press-releases"
+name = "RBI press releases"
+kind = "rss"
+url = "https://rbi.org.in/pressreleases_rss.xml"
+terms_url = ""
+terms_checked = false
+notes = "UNVERIFIED feed address. Confirm it on the RBI RSS page before the first fetch."
