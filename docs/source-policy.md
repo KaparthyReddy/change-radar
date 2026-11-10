@@ -29,3 +29,7 @@ Change Radar reads only official, public sources. This page records the rules an
 The RBI's disclaimer page (https://rbi.org.in/Scripts/Disclaimer.aspx, read in November 2026) does not mention automated reading. It does contain language prohibiting caching and framing of the site's contents, and says that linking to an internal page needs prior permission. It also says the RBI may block access from any address.
 
 Because this project stores text for verification and links to the source page in every item, these sources stay unchecked. Before anything built from them is published or sold, either get written permission from the RBI or take advice from a qualified person. Only then change `terms_checked`.
+
+### Observed behaviour (2026-11-09)
+
+`https://rbi.org.in/robots.txt` returns HTTP 418 with an "Unauthorised Access" page, both for curl's default identity and for this project's identity. The feed addresses return HTTP 200 for both. Because robots.txt cannot be read, the fetcher refuses to fetch RBI sources (fail closed). We treat this as "rules unknown", not as "no rules". Do not disguise the fetcher to get around it. Automated fetching of RBI sources is on hold until the RBI gives permission. Until then, documents are read by hand and imported from local files.
