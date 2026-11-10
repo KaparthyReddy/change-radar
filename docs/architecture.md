@@ -33,7 +33,7 @@ digest (planned): Markdown and HTML
 | `fetch/text.py` | HTML to plain text | Built |
 | `fetch/feeds.py` | RSS and Atom to `Item` | Built |
 | `store.py` | SQLite storage for items and alerts | Built |
-| `extract/` | Turn items into alerts | Planned |
+| `extract/` | Turn items into alerts: rules or an optional local model, then quote verification | Built |
 | `digest/` | Render the digest | Planned |
 | `cli.py` | Command-line interface | Planned |
 

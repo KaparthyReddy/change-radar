@@ -82,7 +82,8 @@ def test_alerts_that_are_not_a_list_are_an_extraction_error() -> None:
 
 
 def test_invented_quote_is_rejected_by_the_gate() -> None:
-    bad = dict(GOOD_ENTRY, quote="The regulator has cancelled the tokenisation deadline completely.")
+    quote = "The regulator has cancelled the tokenisation deadline completely."
+    bad = dict(GOOD_ENTRY, quote=quote)
     extractor = OllamaExtractor("test-model", post=make_post({"alerts": [bad]}))
     result = run_extractor(extractor, ITEM)
     assert result.accepted == []
