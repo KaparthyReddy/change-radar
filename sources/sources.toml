@@ -12,15 +12,15 @@ id = "rbi-notifications"
 name = "RBI notifications"
 kind = "rss"
 url = "https://rbi.org.in/notifications_rss.xml"
-terms_url = ""
+terms_url = "https://rbi.org.in/Scripts/Disclaimer.aspx"
 terms_checked = false
-notes = "UNVERIFIED feed address. Confirm it on the RBI RSS page before the first fetch."
+notes = "Feed address responds with HTTP 200 (checked 2026-11-09). Terms not cleared: see docs/source-policy.md."
 
 [[source]]
 id = "rbi-press-releases"
 name = "RBI press releases"
 kind = "rss"
 url = "https://rbi.org.in/pressreleases_rss.xml"
-terms_url = ""
+terms_url = "https://rbi.org.in/Scripts/Disclaimer.aspx"
 terms_checked = false
-notes = "UNVERIFIED feed address. Confirm it on the RBI RSS page before the first fetch."
+notes = "Feed address responds with HTTP 200 (checked 2026-11-09). Terms not cleared: see docs/source-policy.md."

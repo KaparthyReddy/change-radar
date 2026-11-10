@@ -27,13 +27,17 @@ def test_exact_quote_passes() -> None:
 
 
 def test_whitespace_and_typography_are_ignored() -> None:
-    source = "The regulator\nhas   decided to extend the deadline for \u2018tokenisation\u2019 by three."
+    source = (
+        "The regulator\nhas   decided to extend the deadline for "
+        "\u2018tokenisation\u2019 by three."
+    )
     quote = "The regulator has decided to extend the deadline for 'tokenisation' by three."
     assert verify_quote(quote, source).ok
 
 
 def test_paraphrase_fails() -> None:
-    result = verify_quote("The regulator postponed the tokenisation deadline by three months", SOURCE)
+    quote = "The regulator postponed the tokenisation deadline by three months"
+    result = verify_quote(quote, SOURCE)
     assert not result.ok
     assert "not found" in result.reason
 
