@@ -1,11 +1,11 @@
-"""Deterministic quote verification. The model is never trusted to check its own quotes."""
+"""Deterministic verification. The model is never trusted to check its own output."""
 
 from __future__ import annotations
 
 import unicodedata
 from dataclasses import dataclass
 
-from change_radar.models import Alert, Item
+from change_radar.models import NO_DEADLINE, Alert, Item
 
 MIN_QUOTE_WORDS = 5
 
@@ -50,10 +50,23 @@ def verify_quote(quote: str, source_text: str, min_words: int = MIN_QUOTE_WORDS)
     return QuoteCheck(True)
 
 
+def verify_deadline(deadline: str, source_text: str) -> QuoteCheck:
+    """A stated deadline must appear word for word in the source text."""
+    value = normalise(deadline)
+    if not value or value.lower() == NO_DEADLINE:
+        return QuoteCheck(True)
+    if value not in normalise(source_text):
+        return QuoteCheck(False, "deadline not found in source text")
+    return QuoteCheck(True)
+
+
 def verify_alert(alert: Alert, item: Item) -> QuoteCheck:
     """Check that an alert belongs to the item, links to it, and quotes it accurately."""
     if alert.item_key != item.key:
         return QuoteCheck(False, "alert does not belong to this item")
     if alert.source_url != item.url:
         return QuoteCheck(False, "alert source_url does not match the item URL")
-    return verify_quote(alert.quote, item.text)
+    quote = verify_quote(alert.quote, item.text)
+    if not quote.ok:
+        return quote
+    return verify_deadline(alert.deadline, item.text)
