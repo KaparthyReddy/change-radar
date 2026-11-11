@@ -18,11 +18,7 @@ def extract_with_fallback(
     rules = RuleExtractor()
     if llm is None and model is None:
         return run_extractor(rules, item)
-    model_extractor: Extractor
-    if llm is not None:
-        model_extractor = llm
-    else:
-        model_extractor = OllamaExtractor(model or "")
+    model_extractor: Extractor = llm if llm is not None else OllamaExtractor(model or "")
     first = run_extractor(model_extractor, item)
     if first.accepted:
         return first

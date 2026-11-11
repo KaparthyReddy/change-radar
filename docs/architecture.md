@@ -34,8 +34,8 @@ digest (planned): Markdown and HTML
 | `fetch/feeds.py` | RSS and Atom to `Item` | Built |
 | `store.py` | SQLite storage for items and alerts | Built |
 | `extract/` | Turn items into alerts: rules or an optional local model, then quote verification | Built |
-| `digest/` | Render the digest | Planned |
-| `cli.py` | Command-line interface | Planned |
+| `digest/` | Render the digest as Markdown or HTML | Built |
+| `cli.py` | Command-line interface | Built |
 
 ## Design decisions
 
@@ -44,3 +44,11 @@ digest (planned): Markdown and HTML
 - **Fail closed.** If robots.txt cannot be read, or a source's terms are unchecked, the source is not fetched in normal use.
 - **Changes are first-class.** The store records whether a fetched item is new, changed or unchanged, so a changed document can be flagged.
 - **Feeds first.** Version 0.1 reads feed entries. Fetching the full text behind each link comes after that.
+
+## What verification covers
+
+`verify.py` checks three things: the quote appears word for word in the notice, the alert links to the notice it came from, and any stated deadline appears word for word in the notice.
+
+It does not check the summary fields (what changed, who it affects, what to check). Those are written by rules or a model, and they can say more than the quote supports. For that reason every digest item shows the quote beside the summary, and every item should be read by a person while the project is young.
+
+A model can also fail silently by returning nothing. When a model is used, the rule-based extractor runs as a safety net if the model yields no verified alert.
